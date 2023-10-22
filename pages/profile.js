@@ -15,7 +15,7 @@ import {
     getDocs
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { addToContactInfo } from "../api/updateContactInfo";
+import { addToDatabase, checkLogin } from "../api/dBHelper";
 
 const Profile = () => {
     const { isLoggedIn, user } = useAuth();
@@ -24,29 +24,20 @@ const Profile = () => {
     const [isSaved, setIsSaved] = useState(false);
     const [heading, setHeading] = useState("Enter your Contact Info")
     const [phoneNumber, setPhoneNumber] = useState("");
-    const toast = useToast();
-    
 
-    async function addContact() {
-        if (!isLoggedIn) {
-        toast({
-        title: "You must be logged in to Update an Account",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-        });
-        return;
-        }
+    async function addContact()
+    {
+        checkLogin(isLoggedIn)
         const contact = {
-        phoneNumber:phoneNumber,
-        name: name,
-        userId: user.uid,
+        Phone_Number:phoneNumber,
+        Name: name,
+        User_Id: user.uid,
         };
-        await addToContactInfo(contact);
+        await addToDatabase("contactinfo",contact);
         setIsSaved(true)
         setHeading("Contact Info")
         alert("Contact Updated")
-        };
+    };
 
     useEffect(() => {
         if (!user) {

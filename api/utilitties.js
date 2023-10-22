@@ -2,7 +2,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
-
+import { useToast } from "@chakra-ui/react";
 function refreshData(useStatesetter, dbName)
 {
     const {  user } = useAuth();
@@ -22,5 +22,7 @@ function refreshData(useStatesetter, dbName)
     });
         }, [user]);
 }
+
+
 
 export { refreshData };

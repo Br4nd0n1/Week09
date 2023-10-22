@@ -9,7 +9,7 @@ Select,
 useToast,
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
-import { addTodo } from "../api/todo";
+import { addToDatabase } from "../api/dBHelper";
 const AddTodo = () => {
 const [title, setTitle] = React.useState("");
 const [description, setDescription] = React.useState("");
@@ -32,9 +32,10 @@ const todo = {
 title,
 description,
 status,
-userId: user.uid,
+User_Id: user.uid,
+createdAt: new Date().getTime()
 };
-await addTodo(todo);
+await addToDatabase("todo",todo);
 setIsLoading(false);
 setTitle("");
 setDescription("");

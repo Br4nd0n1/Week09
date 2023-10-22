@@ -8,8 +8,7 @@ import {
   useToast
   } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-
-import { addToShopping } from "../api/createShopping";
+import { addToDatabase } from "../api/dBHelper";
 import useAuth from "../hooks/useAuth";
 
 export function ShoppingModal() {
@@ -32,11 +31,11 @@ export function ShoppingModal() {
     }
     setIsLoading(true);
     const shoppingItem = {
+    User_Id: user.uid,
     food,
     amount,
-    userId: user.uid,
     };
-    await addToShopping(shoppingItem);
+    await addToDatabase("shoppinglist",shoppingItem);
     setFood("");
     setAmount("");
     onClose();
