@@ -27,7 +27,15 @@ const Profile = () => {
 
     async function addContact()
     {
-        checkLogin(isLoggedIn)
+        if (!isLoggedIn) {
+            toast({
+            title: "You must be logged in to Edit Profile",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+            });
+            return;
+            }
         const contact = {
         Phone_Number:phoneNumber,
         Name: name,

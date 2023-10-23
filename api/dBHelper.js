@@ -1,9 +1,10 @@
 import { db } from "../firebase";
 import {
-collection,
-addDoc
+  collection,
+  addDoc,
+  doc,
+  deleteDoc
 } from "firebase/firestore";
-
 
 const addToDatabase = async (dBName, fieldObj) => {
 try 
@@ -16,4 +17,21 @@ catch (err)
 }
 };
 
-export { addToDatabase };
+
+const deleteFromDatabase = async (dbName, docId) => {
+  if (confirm("Are you sure you wanna delete this todo?")) 
+  {
+    try 
+    {
+     const todoRef = doc(db, dbName, docId);
+     await deleteDoc(todoRef);
+    } 
+     catch (err) 
+    {
+     console.log(err);
+    }
+  }
+  };
+
+
+export { addToDatabase, deleteFromDatabase };
