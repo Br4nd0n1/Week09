@@ -7,6 +7,7 @@ Textarea,
 Stack,
 Select,
 useToast,
+Collapse
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import { addToDatabase } from "../api/dBHelper";
@@ -15,6 +16,7 @@ const [title, setTitle] = React.useState("");
 const [description, setDescription] = React.useState("");
 const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
+const [show, setShow] = React.useState(false)
 const toast = useToast();
 const { isLoggedIn, user } = useAuth();
 const handleTodoCreate = async () => {
@@ -43,6 +45,11 @@ setStatus("pending");
 toast({ title: "Todo created successfully", status: "success" });
 };
 return (
+    <>
+      <Button onClick={() => setShow(!show)} mt="1rem">
+        {show ? "Close" : "Create To Do"}
+      </Button>
+      <Collapse in={show}>
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
@@ -79,6 +86,8 @@ Add
 </Button>
 </Stack>
 </Box>
+      </Collapse>
+      </>
 );
 };
 export default AddTodo;
