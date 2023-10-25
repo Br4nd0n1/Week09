@@ -1,5 +1,6 @@
 import { Container,Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import AddTodo from "../components/AddTodo";
+import AddEvent from "../components/AddEvent";
 import Auth from "../components/Auth";
 import TodoList from "../components/TodoList";
 import ShoppingList from "../components/ShoppingList";
@@ -25,6 +26,7 @@ return (
     <ShoppingList />
     </TabPanel>
     <TabPanel>
+    <AddEvent />
       <Calendar />
     </TabPanel>
     <TabPanel>
