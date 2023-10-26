@@ -145,7 +145,7 @@ const TodoList = () => {
                 <Tfoot>
                     <Tr>
                         <Th>To convert</Th>
-                        <Th>into</Th>
+                        <Th>test</Th>
                         <Th isNumeric>multiply by</Th>
                     </Tr>
                 </Tfoot>
