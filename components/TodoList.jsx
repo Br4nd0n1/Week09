@@ -75,10 +75,11 @@ const TodoList = () => {
                         <Th isNumeric>Actions</Th>
                     </Tr>
                 </Thead>
-
+                <Tbody>
                 {getTodos(todos, filter).map((todo) => (
-                    <Tbody>
-                        <Tr>
+                 
+                        <Tr 
+                            key={item.index}>
                             <Td>     
                                 <Heading as="h3" fontSize={"xl"}>
                                     {todo.title}{" "}
@@ -139,10 +140,8 @@ const TodoList = () => {
                                 </Badge>
                             </Td>
                         </Tr>
-                    </Tbody>
-
                 ))}
-
+  </Tbody>
                 <Tfoot>
                     <Tr>
                         <Th>To convert</Th>
