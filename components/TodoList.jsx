@@ -79,7 +79,7 @@ const TodoList = () => {
                 {getTodos(todos, filter).map((todo) => (
                  
                         <Tr 
-                            key={item.index}>
+                            key={todo.index}>
                             <Td>     
                                 <Heading as="h3" fontSize={"xl"}>
                                     {todo.title}{" "}
