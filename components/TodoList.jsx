@@ -26,6 +26,7 @@ import { useState } from "react";
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
     const toast = useToast();
+    const [filter, setFilter] = useState('all');
 
     refreshData(setTodos, "todo")
 
@@ -45,7 +46,24 @@ const TodoList = () => {
         });
     };
 
+
+    function getTodos(localTodos, filter)
+    {
+        if (filter == "all")
+        {
+            return localTodos && localTodos
+        }
+        return localTodos && localTodos.filter(todo => todo.status == filter)
+    }
+
     return (
+        <>
+                    <label htmlFor="filter">Filter:</label>
+            <select id="filter" value={filter} onChange={(event) => setFilter(event.target.value)}>
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
         <TableContainer>
             <Table variant='simple'>
                 <TableCaption>Imperial to metric conversion factors</TableCaption>
@@ -58,7 +76,7 @@ const TodoList = () => {
                     </Tr>
                 </Thead>
 
-                {todos && todos.map((todo) => (
+                {getTodos(todos, filter).map((todo) => (
                     <Tbody>
                         <Tr>
                             <Td>     
@@ -134,7 +152,7 @@ const TodoList = () => {
                 </Tfoot>
             </Table>
         </TableContainer>
-
+        </>
     );
 };
 

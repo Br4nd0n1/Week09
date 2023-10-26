@@ -3,7 +3,6 @@ import {
 Box,
 Input,
 Button,
-Textarea,
 Stack,
 Select,
 useToast,
@@ -13,7 +12,10 @@ import useAuth from "../hooks/useAuth";
 import { addToDatabase } from "../api/dBHelper";
 const AddEvent = () => {
 const [title, setTitle] = React.useState("");
-const [description, setDescription] = React.useState("");
+const [date, setDate] = React.useState("");
+const currentYear = new Date().getFullYear();
+const minDate = `${currentYear}-01-01`;
+const maxDate = `${currentYear + 100}-12-31`;
 const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
 const [show, setShow] = React.useState(false)
@@ -30,26 +32,25 @@ isClosable: true,
 return;
 }
 setIsLoading(true);
-const todo = {
+const event = {
 title,
-description,
-status,
+date,
 User_Id: user.uid,
 createdAt: new Date().getTime()
 };
-await addToDatabase("events",todo);
+await addToDatabase("events",event);
 setIsLoading(false);
 setTitle("");
-setDescription("");
+setDate("");
 setStatus("pending");
-toast({ title: "Todo created successfully", status: "success" });
+toast({ title: "Event created successfully", status: "success" });
 };
 return (
     <>
 
 
       <Button onClick={() => setShow(!show)} mt="1rem">
-        {show ? "Close" : "Create To Do"}
+        {show ? "Close" : "Add Event"}
       </Button>
       <Collapse in={show}>
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>
@@ -59,28 +60,17 @@ placeholder="Title"
 value={title}
 onChange={(e) => setTitle(e.target.value)}
 />
-<Textarea
-placeholder="Description"
-value={description}
-onChange={(e) => setDescription(e.target.value)}
+<Input
+placeholder="Date"
+type="date"
+value={date}
+min={minDate} 
+max={maxDate}
+onChange={(e) => setDate(e.target.value)}
 />
-<Select value={status} onChange={(e) => setStatus(e.target.value)}>
-<option
-value={"pending"}
-style={{ color: "yellow", fontWeight: "bold" }}
->
-Pending ⌛
-</option>
-<option
-value={"completed"}
-style={{ color: "green", fontWeight: "bold" }}
->
-Completed ✅
-</option>
-</Select>
 <Button
 onClick={() => handleEventCreate()}
-disabled={title.length < 1 || description.length < 1 || isLoading}
+disabled={title.length < 1 || date.length < 1 || isLoading}
 variantColor="teal"
 variant="solid"
 >
