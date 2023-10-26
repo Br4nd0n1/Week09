@@ -19,7 +19,7 @@ import { db } from "../../firebase";
 import { updateDatabase } from "../../api/dBHelper";
 
 
-const SingleToDo = ({toDoData}) => {
+const SingleToDo = ({id,toDoData}) => {
     const toast = useToast();
     const [title, setTitle] = React.useState(toDoData.title);
     const [description, setDescription] = React.useState(toDoData.description);

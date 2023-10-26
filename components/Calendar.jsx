@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, Button, Grid, GridItem } from "@chakra-ui/react";
-
+import { Box, Button, Grid, GridItem, Badge } from "@chakra-ui/react";
+import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
+import { deleteFromDatabase } from "../api/dBHelper";
 import { refreshData } from "../api/utilitties";
 import Link from 'next/link';
 const Calendar = () => {
@@ -8,6 +9,7 @@ const Calendar = () => {
   const date = new Date();
   const dateName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   // Get the number of days in the current month
+  
   const [month, setMonth] = React.useState(date.getMonth() + 1);
   const [year, setYear] = React.useState(date.getFullYear());
   const [startReached, setStartReached] = React.useState(month === 0);
@@ -28,7 +30,23 @@ const Calendar = () => {
     let data = []
     data = localEvent && localEvent.map((item) => { 
       if(item.date == calendarDate) {
-        return <><br></br><Link href={`/events/${item.id}`} color="blue.500">{item.title}</Link></>;
+        return (
+        <>
+        <br></br><Link href={`/events/${item.id}`} color="blue.500">{item.title}</Link>
+        <Badge
+    color="red.500"
+    bg="inherit"
+    transition={"0.2s"}
+    _hover={{
+    bg: "inherit",
+    transform: "scale(1.2)",
+    }}
+    float="right"
+    size="xs"
+    onClick={() => deleteFromDatabase("events",item.id)}
+> <FaTrash />  </Badge>
+        </>
+        );
       }
       return null;
     })

@@ -1,8 +1,11 @@
 import React from "react";
 import {
     Box,
+    Button,
     Heading,
+    Input,
     Link,
+    useToast,
     UnorderedList,
     ListItem
 } from "@chakra-ui/react";
@@ -12,30 +15,59 @@ import {
     getDoc
 } from "firebase/firestore";
 import { db } from "../../firebase";
+import { updateDatabase } from "../../api/dBHelper";
 
-const SingleToDo = ({shoppingData}) => {
-
+const Contact = ({id,contactData}) => {
+const toast = useToast();
+    const [name, setName] = React.useState(contactData.title);
+    const [phoneNumber, setPhoneNumber] = React.useState(contactData.phoneNumber);
+    const [email, setEmail] = React.useState(contactData.email);
+    const [birthday, setBirthday] = React.useState(contactData.birthday);
     const { user } = useAuth() || {};
+
+    const handleUpdate = async () => {
+        const contact = {
+            name,
+            phoneNumber,
+            email,
+            birthday,
+            };
+        await updateDatabase("contacts", contact, id);
+        toast({
+            title: `Contact Updated`,
+            status: "success",
+        });
+    };
+
     if (!user) {
         return;
     }
 
     return (
         <Box m={5}>
-            <Heading as="h3" fontSize={"xl"}>
-                { shoppingData.name }
-            </Heading>
-            <UnorderedList p={4}>
-                <ListItem>
-                    { shoppingData.email }
-                </ListItem>
-                <ListItem>
-                    { shoppingData.phoneNumber }
-                </ListItem>
-                <ListItem>
-                    { shoppingData.birthday }
-                </ListItem>
-            </UnorderedList>
+<Input
+placeholder="Name"
+defaultValue={contactData.name}
+onChange={(e) => setName(e.target.value)}
+/>
+<Input
+placeholder="Phone Number"
+defaultValue={contactData.phoneNumber}
+onChange={(e) => setPhoneNumber(e.target.value)}
+/>
+<Input
+placeholder="Email"
+defaultValue={contactemail.email}
+onChange={(e) => setEmail(e.target.value)}
+/>
+<Input
+placeholder="Birthday"
+type="date"
+defaultValue={ contactData.birthday }
+onChange={(e) => setBirthday(e.target.value)}
+/>
+
+<Button onClick={() => handleUpdate()}>Update</Button>
             <Link href="/" color="blue.500">Back</Link>
         </Box>
     );
@@ -43,20 +75,24 @@ const SingleToDo = ({shoppingData}) => {
 
 export async function getServerSideProps(context) {
 
-    let shoppingData = null;
-    const docRef = doc( db, 'contacts', context.params.id );
+    let contactData = null;
+    let id = context.params.id
+    const docRef = doc( db, 'Contacts', id );
     const docSnap = await getDoc(docRef);
     
     if ( docSnap.exists() ) {
-        shoppingData = docSnap.data();
+        contactData = docSnap.data();
     }
+
+        console.log(contactData)
 
     return {
         props: {
-                 shoppingData
+                 id,
+                 contactData
                }
     };
 }
 
 
-export default SingleToDo;
+export default Contact;
