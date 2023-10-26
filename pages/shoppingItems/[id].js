@@ -19,7 +19,7 @@ import { updateDatabase } from "../../api/dBHelper";
 
 const Contact = ({id,contactData}) => {
 const toast = useToast();
-    const [name, setName] = React.useState(contactData.title);
+    const [name, setName] = React.useState(contactData.name);
     const [phoneNumber, setPhoneNumber] = React.useState(contactData.phoneNumber);
     const [email, setEmail] = React.useState(contactData.email);
     const [birthday, setBirthday] = React.useState(contactData.birthday);

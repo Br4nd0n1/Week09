@@ -70,16 +70,16 @@ onChange={(e) => setStatus(e.target.value)}
 
 export async function getServerSideProps(context) {
 
-    let eventData = null;
+    let toDoData = null;
     let id = context.params.id
     const docRef = doc( db, 'todo', id );
     const docSnap = await getDoc(docRef);
     
     if ( docSnap.exists() ) {
-        eventData = docSnap.data();
+        toDoData = docSnap.data();
     }
 
-        console.log(eventData)
+        console.log(toDoData)
 
     return {
         props: {
