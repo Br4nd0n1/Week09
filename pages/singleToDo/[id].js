@@ -7,7 +7,8 @@ import {
     Link,
     useToast,
     UnorderedList,
-    ListItem
+    ListItem,
+    Select
 } from "@chakra-ui/react";
 import useAuth from "../../hooks/useAuth";
 import {
@@ -58,8 +59,8 @@ onChange={(e) => setDescription(e.target.value)}
 defaultValue={toDoData.status}
 onChange={(e) => setStatus(e.target.value)}
 >
-<Option value="pending">Pending</Option>
-  <Option value="completed">Completed</Option>
+<option value="pending">Pending</option>
+  <option value="completed">Completed</option>
 </Select>
 <Button onClick={() => handleUpdate()}>Update</Button>
             <Link href="/" color="blue.500">Back</Link>
