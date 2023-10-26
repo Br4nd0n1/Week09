@@ -14,15 +14,17 @@ import useAuth from "../hooks/useAuth";
 export function ShoppingModal() {
   const { isLoggedIn, user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [food, setFood] = useState("");
-  const [amount, setAmount] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const addShoppingItem = async () => {
     if (!isLoggedIn) {
     toast({
-    title: "You must be logged in to create a shoppingItem",
+    title: "You must be logged in to create a contact",
     status: "error",
     duration: 9000,
     isClosable: true,
@@ -32,14 +34,18 @@ export function ShoppingModal() {
     setIsLoading(true);
     const shoppingItem = {
     User_Id: user.uid,
-    food,
-    amount,
+    name,
+    email,
+    phoneNumber,
+    birthday,
     };
-    await addToDatabase("shoppinglist",shoppingItem);
-    setFood("");
-    setAmount("");
+    await addToDatabase("contacts",shoppingItem);
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
+    setBirthday("");
     onClose();
-    toast({ title: "shoppingItem created successfully", status: "success" });
+    toast({ title: "contact created successfully", status: "success" });
     };
 
 
@@ -56,19 +62,30 @@ export function ShoppingModal() {
           <Box w="40%" margin={"0 auto"} display="block" mt={5}>
 <Stack direction="column">
 <Input
-placeholder="amount"
-value={amount}
-onChange={(e) => setAmount(e.target.value)}
+placeholder="name"
+value={name}
+onChange={(event) => setName(event.target.value)}
 />
-<Textarea
-placeholder="food"
-value={food}
-onChange={(e) => setFood(e.target.value)}
+<Input
+placeholder="email"
+value={email}
+onChange={(event) => setEmail(event.target.value)}
+/>
+<Input
+placeholder="phone number"
+value={phoneNumber}
+onChange={(event) => setPhoneNumber(event.target.value)}
+/>
+<Input
+placeholder="birthday"
+value={birthday}
+type="date"
+onChange={(event) => setBirthday(event.target.value)}
 />
 
 <Button
 onClick={() => addShoppingItem()}
-disabled={amount.length < 1 || food.length < 1 || isLoading}
+isDisabled={name.length < 1 || email.length < 1 || phoneNumber.length < 1 || birthday.length < 1 || isLoading}
 variantColor="teal"
 variant="solid"
 >

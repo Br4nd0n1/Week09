@@ -13,13 +13,13 @@ import {
     const ShoppingList = () => {
     const [shopping, setshopping] = useState([]);
 
-    refreshData(setshopping, "shoppinglist")
+    refreshData(setshopping, "contacts")
 
     return (
     <Box mt={5}>
     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
     {shopping &&
-    shopping.map((item) => (
+    shopping.map((item, index) => (
     <Box
     p={3}
     boxShadow="2xl"
@@ -27,7 +27,7 @@ import {
     transition="0.2s"
     _hover={{ boxShadow: "sm" }}
     >
-    <Heading as="h3" fontSize={"xl"}>Food Item</Heading>
+    <Heading as="h3" fontSize={"xl"}>Contact {index + 1}</Heading>
     <Badge
     color="red.500"
     bg="inherit"
@@ -38,11 +38,13 @@ import {
     }}
     float="right"
     size="xs"
-    onClick={() => deleteFromDatabase("shoppinglist",item.id)}
+    onClick={() => deleteFromDatabase("contacts",item.id)}
 > <FaTrash />  </Badge>
 
-    <Text>{item.food}</Text>
-    <Text>{item.amount}</Text>
+    <Text>{item.name}</Text>
+    <Text>{item.phoneNumber}</Text>
+    <Text>{item.email}</Text>
+    <Text>{item.birthday}</Text>
     <Link href={`/shoppingItems/${item.id}`} color="blue.500"> View</Link>
     </Box>
     ))}

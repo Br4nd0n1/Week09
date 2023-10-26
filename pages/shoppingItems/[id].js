@@ -23,11 +23,17 @@ const SingleToDo = ({shoppingData}) => {
     return (
         <Box m={5}>
             <Heading as="h3" fontSize={"xl"}>
-                { shoppingData.food }
+                { shoppingData.name }
             </Heading>
             <UnorderedList p={4}>
                 <ListItem>
-                    { shoppingData.amount }
+                    { shoppingData.email }
+                </ListItem>
+                <ListItem>
+                    { shoppingData.phoneNumber }
+                </ListItem>
+                <ListItem>
+                    { shoppingData.birthday }
                 </ListItem>
             </UnorderedList>
             <Link href="/" color="blue.500">Back</Link>
@@ -38,7 +44,7 @@ const SingleToDo = ({shoppingData}) => {
 export async function getServerSideProps(context) {
 
     let shoppingData = null;
-    const docRef = doc( db, 'shoppinglist', context.params.id );
+    const docRef = doc( db, 'contacts', context.params.id );
     const docSnap = await getDoc(docRef);
     
     if ( docSnap.exists() ) {
