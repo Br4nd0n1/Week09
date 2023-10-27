@@ -51,12 +51,12 @@ export function ShoppingModal() {
 
    return (
     <>
-      <Button onClick={onOpen} color="yellow.500">Add To Shoping List</Button>
+      <Button onClick={onOpen} color="yellow.500">Add Contact</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Shopping Item</ModalHeader>
+          <ModalHeader>New Contact</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
           <Box w="40%" margin={"0 auto"} display="block" mt={5}>

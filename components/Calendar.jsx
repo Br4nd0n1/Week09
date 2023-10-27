@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, Grid, GridItem, Badge } from "@chakra-ui/react";
-import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
+import { Flex, Select, Text, Box, Button, Grid, GridItem, Badge } from "@chakra-ui/react";
+import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
 import { deleteFromDatabase } from "../api/dBHelper";
 import { refreshData } from "../api/utilitties";
 import Link from 'next/link';
@@ -32,19 +32,22 @@ const Calendar = () => {
       if(item.date == calendarDate) {
         return (
         <>
-        <br></br><Link href={`/events/${item.id}`} color="blue.500">{item.title}</Link>
-        <Badge
-    color="red.500"
-    bg="inherit"
-    transition={"0.2s"}
-    _hover={{
-    bg: "inherit",
-    transform: "scale(1.2)",
-    }}
-    float="right"
-    size="xs"
-    onClick={() => deleteFromDatabase("events",item.id)}
-> <FaTrash />  </Badge>
+        <br></br><Flex align='center'><Link href={`/events/${item.id}`} ><Text color="blue.500" me="0.25rem" textDecoration="underline">{item.title}</Text></Link>
+                                <Badge
+                                    color="red.500"
+                                    bg="inherit"
+                                    transition={"0.2s"}
+                                    _hover={{
+                                        bg: "inherit",
+                                        transform: "scale(1.2)",
+                                    }}
+                         
+                                    size="xs"
+                                    onClick={() => deleteFromDatabase(item.id)}
+                                >
+                                    <FaTrash />
+                                </Badge>
+                                </Flex>
         </>
         );
       }
@@ -99,23 +102,33 @@ const Calendar = () => {
 
    console.log(events)
    return (
-     <Box>
-       <p>{dateName[month-1]}</p>
-       <Button isDisabled={startReached} onClick={() => handleDateUpdate(month-1)}>Prev</Button>
-       <Button isDisabled={endReached} onClick={() => handleDateUpdate(month+1)}>Next</Button>
-       <select value={year} onChange={handleChangeYear}>
-         {getYearOptions().map((yearOption, index) => (
-           <option key={index} value={yearOption}>{yearOption}</option>
-         ))}
-       </select>
-       <Grid templateColumns='repeat(7, 1fr)' gap={6}>
-         {days.map((day, index) => (
-           <GridItem key={index} w='100%' h='20' bg='blue.500'>
-             {day}.{getEventData(events,`${year}-${month}-${day}`)}
-           </GridItem>
-         ))}
-       </Grid>
-     </Box>
+<Box>
+  <Flex align='end' justify='space-evenly'>
+    <Text>Month: {dateName[month-1]}</Text>
+    <Button isDisabled={startReached} onClick={() => handleDateUpdate(month-1)}>Prev Month</Button>
+    <Button isDisabled={endReached} onClick={() => handleDateUpdate(month+1)}>Next Month</Button>
+    <Box>
+      <Text>Select Year:</Text>
+      <Select value={year} onChange={handleChangeYear}>
+        {getYearOptions().map((yearOption, index) => (
+          <option key={index} value={yearOption}>{yearOption}</option>
+        ))}
+      </Select>
+    </Box>
+  </Flex>
+  <Grid templateColumns='repeat(7, 1fr)' gap={6} mt="1rem">
+    {days.map((day, index) => (
+      <GridItem key={index} w='100%' minH='20' borderColor='blue.500' borderWidth='1px' borderRadius='md' boxShadow='md'>
+        {day}.{getEventData(events,`${year}-${month}-${day}`)}
+      </GridItem>
+    ))}
+  </Grid>
+</Box>
+
+
+
+
+
    );
  };
 

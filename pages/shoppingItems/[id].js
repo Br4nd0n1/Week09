@@ -57,7 +57,7 @@ onChange={(e) => setPhoneNumber(e.target.value)}
 />
 <Input
 placeholder="Email"
-defaultValue={contactemail.email}
+defaultValue={contactData.email}
 onChange={(e) => setEmail(e.target.value)}
 />
 <Input
@@ -77,7 +77,7 @@ export async function getServerSideProps(context) {
 
     let contactData = null;
     let id = context.params.id
-    const docRef = doc( db, 'Contacts', id );
+    const docRef = doc( db, 'contacts', id );
     const docSnap = await getDoc(docRef);
     
     if ( docSnap.exists() ) {
