@@ -46,8 +46,8 @@ toast({ title: "Todo created successfully", status: "success" });
 };
 return (
     <>
-      <Button onClick={() => setShow(!show)} mt="1rem">
-        {show ? "Close" : "Create To Do"}
+      <Button onClick={() => setShow(!show)} mt="1rem" me="1rem">
+        {show ? "Close" : "Add To Do"}
       </Button>
       <Collapse in={show}>
 <Box w="40%" margin={"0 auto"} display="block" mt={5}>

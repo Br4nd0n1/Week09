@@ -2,12 +2,9 @@ import React from "react";
 import {
     Box,
     Button,
-    Heading,
     Input,
     Link,
     useToast,
-    UnorderedList,
-    ListItem
 } from "@chakra-ui/react";
 import useAuth from "../../hooks/useAuth";
 import {
@@ -45,12 +42,14 @@ const maxDate = `${currentYear + 100}-12-31`;
     return (
         <Box m={5}>
 <Input
+mb={5}
 placeholder="Title"
 defaultValue={eventData.title}
 onChange={(e) => setTitle(e.target.value)}
 />
 
                 <Input
+mb={5}
 placeholder="Date"
 type="date"
 defaultValue={ eventData.date }
@@ -58,7 +57,7 @@ min={minDate}
 max={maxDate}
 onChange={(e) => setDate(e.target.value)}
 />
-<Button onClick={() => handleUpdate()}>Update</Button>
+<Button onClick={() => handleUpdate()} me={5}>Update</Button>
             <Link href="/" color="blue.500">Back</Link>
         </Box>
     );

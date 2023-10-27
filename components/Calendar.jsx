@@ -1,14 +1,14 @@
 import React from 'react';
 import { Flex, Select, Text, Box, Button, Grid, GridItem, Badge } from "@chakra-ui/react";
-import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { deleteFromDatabase } from "../api/dBHelper";
 import { refreshData } from "../api/utilitties";
 import Link from 'next/link';
 const Calendar = () => {
-  // Get the current date
+
   const date = new Date();
   const dateName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  // Get the number of days in the current month
+
   
   const [month, setMonth] = React.useState(date.getMonth() + 1);
   const [year, setYear] = React.useState(date.getFullYear());
@@ -17,7 +17,7 @@ const Calendar = () => {
   const [events, setEvents] = React.useState([]);
 
   refreshData(setEvents, "events")
-  // Create an array of days
+
   let daysInMonth = new Date(date.getFullYear(), month, 0).getDate();
   const [days, setDays] = React.useState(Array.from({ length: daysInMonth }, (_, i) => i + 1));
 
@@ -104,11 +104,11 @@ const Calendar = () => {
    return (
 <Box>
   <Flex align='end' justify='space-evenly'>
-    <Text>Month: {dateName[month-1]}</Text>
+    <Text><strong>Month:</strong><br></br>{dateName[month-1]}</Text>
     <Button isDisabled={startReached} onClick={() => handleDateUpdate(month-1)}>Prev Month</Button>
     <Button isDisabled={endReached} onClick={() => handleDateUpdate(month+1)}>Next Month</Button>
     <Box>
-      <Text>Select Year:</Text>
+      <Text><strong>Year:</strong></Text>
       <Select value={year} onChange={handleChangeYear}>
         {getYearOptions().map((yearOption, index) => (
           <option key={index} value={yearOption}>{yearOption}</option>

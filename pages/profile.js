@@ -5,7 +5,6 @@ import {
     Link,
     Input,
     Button,
-    useToast
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import {
@@ -15,7 +14,7 @@ import {
     getDocs
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { addToDatabase, checkLogin } from "../api/dBHelper";
+import { addToDatabase } from "../api/dBHelper";
 
 const Profile = () => {
     const { isLoggedIn, user } = useAuth();
@@ -66,14 +65,14 @@ const Profile = () => {
     if (!itemData) {
         return (
         <Box mt={5}>
-            <Heading as="h3" fontSize={"xl"}>
+            <Heading as="h3" fontSize={"xl"} mt={5}>
                 {heading}
             </Heading>
-            <Input disabled={isSaved} placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-            <Input disabled={isSaved} placeholder="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+            <Input disabled={isSaved} placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}  mt={5}/>
+            <Input disabled={isSaved} placeholder="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} mt={5}/>
             <Button onClick={() => addContact()}
-hidden={isSaved}>Save</Button>
-            <Link href="/" color="blue.500">Back</Link>
+hidden={isSaved} mt={5}>Save</Button>
+            <Link href="/" color="blue.500" mt={5}>Back</Link>
         </Box>
         );
     }
@@ -83,9 +82,9 @@ hidden={isSaved}>Save</Button>
 <Heading as="h3" fontSize={"xl"}>
     Contact Info
 </Heading>
-<Input disabled="true" placeholder="Name" value={itemData.Name}/>
-<Input disabled="true" placeholder="Phone Number" value={itemData.Phone_Number}/>
-<Link href="/" color="blue.500">Back</Link>
+<Input disabled="true" placeholder="Name" value={itemData.Name} mt={5}/>
+<Input disabled="true" placeholder="Phone Number" value={itemData.Phone_Number} mt={5}  mb={5}/>
+<Link href="/" color="blue.500" mt={5}>Back</Link>
 </Box>
     );
 };

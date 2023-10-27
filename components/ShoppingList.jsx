@@ -7,7 +7,7 @@ import {
     Text,
     } from "@chakra-ui/react";
     import { refreshData } from "../api/utilitties";
-    import { FaToggleOff, FaToggleOn, FaTrash } from "react-icons/fa";
+    import { FaTrash } from "react-icons/fa";
     import { useState } from "react";
     import { deleteFromDatabase } from "../api/dBHelper";
     const ShoppingList = () => {
@@ -46,7 +46,7 @@ import {
     <Text>{item.phoneNumber}</Text>
     <Text>{item.email}</Text>
     <Text>{item.birthday}</Text>
-    <Link href={`/shoppingItems/${item.id}`} color="blue.500"> View</Link>
+    <Link href={`/shoppingItems/${item.id}`} color="blue.500">Edit</Link>
     </Box>
     ))}
     </SimpleGrid>

@@ -4,10 +4,9 @@ import {
   Box,
   Stack,
   Input,
-  Textarea,
   useToast
   } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { addToDatabase } from "../api/dBHelper";
 import useAuth from "../hooks/useAuth";
 
@@ -51,7 +50,7 @@ export function ShoppingModal() {
 
    return (
     <>
-      <Button onClick={onOpen} color="yellow.500">Add Contact</Button>
+      <Button onClick={onOpen} >Add Contact</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

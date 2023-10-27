@@ -4,7 +4,6 @@ Box,
 Input,
 Button,
 Stack,
-Select,
 useToast,
 Collapse
 } from "@chakra-ui/react";
@@ -16,7 +15,6 @@ const [date, setDate] = React.useState("");
 const currentYear = new Date().getFullYear();
 const minDate = `${currentYear}-01-01`;
 const maxDate = `${currentYear + 100}-12-31`;
-const [status, setStatus] = React.useState("pending");
 const [isLoading, setIsLoading] = React.useState(false);
 const [show, setShow] = React.useState(false)
 const toast = useToast();

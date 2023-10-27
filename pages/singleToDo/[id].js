@@ -2,12 +2,9 @@ import React from "react";
 import {
     Box,
     Button,
-    Heading,
     Input,
     Link,
     useToast,
-    UnorderedList,
-    ListItem,
     Select
 } from "@chakra-ui/react";
 import useAuth from "../../hooks/useAuth";
@@ -44,25 +41,29 @@ const SingleToDo = ({id,toDoData}) => {
     }
 
     return (
-        <Box m={5}>
+        <Box m={5} >
 <Input
+mb={5}
 placeholder="Title"
 defaultValue={toDoData.title}
 onChange={(e) => setTitle(e.target.value)}
 />
 <Input
+mb={5}
 placeholder="Description"
 defaultValue={toDoData.description}
 onChange={(e) => setDescription(e.target.value)}
 />
 <Select
+mb={5}
 defaultValue={toDoData.status}
 onChange={(e) => setStatus(e.target.value)}
 >
 <option value="pending">Pending</option>
   <option value="completed">Completed</option>
 </Select>
-<Button onClick={() => handleUpdate()}>Update</Button>
+<Button onClick={() => handleUpdate()} 
+me={5}>Update</Button>
             <Link href="/" color="blue.500">Back</Link>
         </Box>
     );

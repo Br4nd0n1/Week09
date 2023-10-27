@@ -1,21 +1,17 @@
 import {
     Badge,
-    Box,
+    Flex,
     Link,
     Heading,
-    SimpleGrid,
     Text,
     useToast,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
-    Collapse
 } from "@chakra-ui/react";
 import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
 
@@ -59,14 +55,13 @@ const TodoList = () => {
     return (
         <>
                     <label htmlFor="filter">Filter:</label>
-            <select id="filter" value={filter} onChange={(event) => setFilter(event.target.value)}>
+            <select id="filter" value={filter} onChange={(event) => setFilter(event.target.value)} >
                 <option value="all">All</option>
                 <option value="completed">Completed</option>
                 <option value="pending">Pending</option>
             </select>
         <TableContainer>
             <Table variant='simple'>
-                <TableCaption>Imperial to metric conversion factors</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>To Do</Th>
@@ -84,13 +79,12 @@ const TodoList = () => {
                                 <Heading as="h3" fontSize={"xl"}>
                                     {todo.title}{" "}
                                 </Heading>
-                                <Text>{todo.description}</Text>
                   
                             </Td>
                             <Td>     
                                 <Text>{todo.description}</Text>
                             </Td>
-                            <Td>     
+                            <Td>   
                                 <Badge
                                     color={todo.status == "pending" ? "gray.500" : "green.500"}
                                     bg="inherit"
@@ -106,14 +100,17 @@ const TodoList = () => {
                                     {todo.status == "pending" ? <FaToggleOff /> : <FaToggleOn />}
                                 </Badge>
                                 <Badge
-                                    float="right"
+                                me="1rem"
+                                                   float="right"
                                     opacity="0.8"
                                     bg={todo.status == "pending" ? "yellow.500" : "green.500"}
                                 >
                                     {todo.status}
                                 </Badge> 
+                               
                             </Td>
                             <Td >  
+                            <Flex align='top' justify='space-evenly' float="right">
                             <Link href={`/singleToDo/${todo.id}`}             
                                 color="blue.500"
                                     bg="inherit"
@@ -122,7 +119,7 @@ const TodoList = () => {
                                         bg: "inherit",
                                         transform: "scale(1.2)",
                                     }}
-                                    float="left"
+                                    me="1rem"
                                     size="xs">  <FaEdit /></Link> 
                                 <Badge
                                     color="red.500"
@@ -132,23 +129,17 @@ const TodoList = () => {
                                         bg: "inherit",
                                         transform: "scale(1.2)",
                                     }}
-                                    float="right"
+                 
                                     size="xs"
                                     onClick={() => handleTodoDelete(todo.id)}
                                 >
                                     <FaTrash />
                                 </Badge>
+                                </Flex>
                             </Td>
                         </Tr>
                 ))}
   </Tbody>
-                <Tfoot>
-                    <Tr>
-                        <Th>To convert</Th>
-                        <Th>test</Th>
-                        <Th isNumeric>multiply by</Th>
-                    </Tr>
-                </Tfoot>
             </Table>
         </TableContainer>
         </>

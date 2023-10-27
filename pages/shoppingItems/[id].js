@@ -2,12 +2,9 @@ import React from "react";
 import {
     Box,
     Button,
-    Heading,
     Input,
     Link,
     useToast,
-    UnorderedList,
-    ListItem
 } from "@chakra-ui/react";
 import useAuth from "../../hooks/useAuth";
 import {
@@ -46,28 +43,32 @@ const toast = useToast();
     return (
         <Box m={5}>
 <Input
+mb={5}
 placeholder="Name"
 defaultValue={contactData.name}
 onChange={(e) => setName(e.target.value)}
 />
 <Input
+mb={5}
 placeholder="Phone Number"
 defaultValue={contactData.phoneNumber}
 onChange={(e) => setPhoneNumber(e.target.value)}
 />
 <Input
+mb={5}
 placeholder="Email"
 defaultValue={contactData.email}
 onChange={(e) => setEmail(e.target.value)}
 />
 <Input
+mb={5}
 placeholder="Birthday"
 type="date"
 defaultValue={ contactData.birthday }
 onChange={(e) => setBirthday(e.target.value)}
 />
 
-<Button onClick={() => handleUpdate()}>Update</Button>
+<Button onClick={() => handleUpdate()} me={5}>Update</Button>
             <Link href="/" color="blue.500">Back</Link>
         </Box>
     );
