@@ -14,9 +14,8 @@ import {
     TableContainer,
 } from "@chakra-ui/react";
 import { FaToggleOff, FaToggleOn, FaTrash, FaEdit } from "react-icons/fa";
-
+import { updateDatabase, deleteFromDatabase } from "../api/dBHelper";
 import { refreshData } from "../api/utilitties";
-import { deleteTodo, toggleTodoStatus } from "../api/todo";
 import { useState } from "react";
 
 const TodoList = () => {
@@ -26,16 +25,9 @@ const TodoList = () => {
 
     refreshData(setTodos, "todo")
 
-    const handleTodoDelete = async (id) => {
-        if (confirm("Are you sure you wanna delete this todo?")) {
-            deleteTodo(id);
-            toast({ title: "Todo deleted successfully", status: "success" });
-        }
-    };
-
     const handleToggle = async (id, status) => {
         const newStatus = status == "completed" ? "pending" : "completed";
-        await toggleTodoStatus({ docId: id, status: newStatus });
+        await updateDatabase("todo", {status: newStatus}, id)
         toast({
             title: `Todo marked ${newStatus}`,
             status: newStatus == "completed" ? "success" : "warning",
@@ -71,10 +63,10 @@ const TodoList = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                {getTodos(todos, filter).map((todo) => (
+                {getTodos(todos, filter).map((todo, index) => (
                  
                         <Tr 
-                            key={todo.index}>
+                            key={index}>
                             <Td>     
                                 <Heading as="h3" fontSize={"xl"}>
                                     {todo.title}{" "}
@@ -131,7 +123,7 @@ const TodoList = () => {
                                     }}
                  
                                     size="xs"
-                                    onClick={() => handleTodoDelete(todo.id)}
+                                    onClick={() => deleteFromDatabase("todo",todo.id)}
                                 >
                                     <FaTrash />
                                 </Badge>

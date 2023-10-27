@@ -26,7 +26,7 @@ import {
     shadow={"dark-lg"}
     transition="0.2s"
     _hover={{ boxShadow: "sm" }}
-    key={item.index}
+    key={index}
     >
     <Heading as="h3" fontSize={"xl"}>Contact {index + 1}</Heading>
     <Badge

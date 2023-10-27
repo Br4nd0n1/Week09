@@ -40,7 +40,6 @@ await addToDatabase("events",event);
 setIsLoading(false);
 setTitle("");
 setDate("");
-setStatus("pending");
 toast({ title: "Event created successfully", status: "success" });
 };
 return (

@@ -72,7 +72,7 @@ const Profile = () => {
             <Input disabled={isSaved} placeholder="Phone Number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} mt={5}/>
             <Button onClick={() => addContact()}
 hidden={isSaved} mt={5}>Save</Button>
-            <Link href="/" color="blue.500" mt={5}>Back</Link>
+            <Link href="/" color="blue.500" mt={5} ms={5}>Back</Link>
         </Box>
         );
     }

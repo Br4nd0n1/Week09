@@ -43,6 +43,7 @@ export function ShoppingModal() {
     setEmail("");
     setPhoneNumber("");
     setBirthday("");
+    setIsLoading(false)
     onClose();
     toast({ title: "contact created successfully", status: "success" });
     };

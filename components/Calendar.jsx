@@ -28,10 +28,10 @@ const Calendar = () => {
 
   function getEventData(localEvent, calendarDate) {
     let data = []
-    data = localEvent && localEvent.map((item) => { 
+    data = localEvent && localEvent.map((item, index) => { 
       if(item.date == calendarDate) {
         return (
-        <>
+        < div key={index}>
         <br></br><Flex align='center'><Link href={`/events/${item.id}`} ><Text color="blue.500" me="0.25rem" textDecoration="underline">{item.title}</Text></Link>
                                 <Badge
                                     color="red.500"
@@ -43,12 +43,12 @@ const Calendar = () => {
                                     }}
                          
                                     size="xs"
-                                    onClick={() => deleteFromDatabase(item.id)}
+                                    onClick={() => deleteFromDatabase("events",item.id)}
                                 >
                                     <FaTrash />
                                 </Badge>
                                 </Flex>
-        </>
+        </div>
         );
       }
       return null;
